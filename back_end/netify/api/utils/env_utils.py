@@ -1,6 +1,6 @@
 import logging
 
-env = 'QA'
+env = 'PROD'
 
 logging.getLogger().setLevel(logging.DEBUG)
 

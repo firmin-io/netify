@@ -13,7 +13,7 @@
 
 service: netify
 # api and org for use with dashboard.serverless.com
-app: netify-netify
+app: netify-api
 org: firminsa
 
 # You can pin your service to only deploy with a specific Serverless version
@@ -25,7 +25,7 @@ provider:
   runtime: python3.7
   region: us-east-1
   profile: netify
-  timeout: 30
+  timeout: 40
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -122,7 +122,7 @@ functions:
     handler: api/handlers/batch.send_messages
     events:
       - stream:
-          arn: arn:aws:dynamodb:us-east-2:862472270775:table/netify_message/stream/2020-04-18T20:03:42.913
+          arn: arn:aws:dynamodb:us-east-1:862472270775:table/netify_message/stream/2020-04-18T20:58:00.747
           batchSize: 1
           startingPosition: LATEST
           maximumRetryAttempts: 1
