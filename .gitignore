@@ -1,0 +1,6 @@
+back_end/netify/venv
+back_end/netify/Pipfile
+**__pycache__
+back_end/netify/.serverless
+back_end/netify/node_modules
+back_end/netify/.requirements

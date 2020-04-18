@@ -1,0 +1,129 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: netify
+# api and org for use with dashboard.serverless.com
+app: netify-netify
+org: firminsa
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+# frameworkVersion: "=X.X.X"
+
+provider:
+  name: aws
+  runtime: python3.7
+  region: us-east-1
+  profile: netify
+  timeout: 30
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:DescribeTable
+        - apidynamodb:DescribeStreamapi
+        - apidynamodb:GetRecordsapi
+        - apidynamodb:GetShardIteratorapi
+        - apidynamodb:ListStreamsapi
+        - sns:Publish
+      Resource: "*"
+
+#  stage: dev
+#  region: us-east-1
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    usePipenv: false
+    pythonBin: "python"
+    fileName: "prod-requirements.txt"
+
+# you can add packaging information here
+package:
+  #  include:
+  #    - include-me.py
+  #    - include-me-dir/**
+  exclude:
+    - swagger/**
+    - .idea/**
+    - LICENSE
+    - package-lock.json
+    - package.json
+    - Pipfile
+    - venv/**
+    - node_modules/**
+    - server.py
+    - generator.py
+
+functions:
+  login:
+    handler: api/handlers/user.login
+    events:
+      - http:
+          path: netify/login
+          method: post
+
+  create_user:
+    handler: api/handlers/user.create_user
+    events:
+      - http:
+          path: netify/users
+          method: post
+
+  get_users:
+    handler: api/handlers/user.get_users
+    events:
+      - http:
+          path: netify/users
+          method: get
+
+  delete_user:
+    handler: api/handlers/user.delete_user
+    events:
+      - http:
+          path: netify/users/{user_id}
+          method: delete
+          request:
+            paths:
+              user_id: true
+
+  create_message:
+    handler: api/handlers/message.create_message
+    events:
+      - http:
+          path: netify/messages
+          method: post
+
+  get_messages:
+    handler: api/handlers/message.get_messages
+    events:
+      - http:
+          path: netify/messages
+          method: get
+
+  batch:
+    handler: api/handlers/batch.send_messages
+    events:
+      - stream:
+          arn: arn:aws:dynamodb:us-east-2:862472270775:table/netify_message/stream/2020-04-18T20:03:42.913
+          batchSize: 1
+          startingPosition: LATEST
+          maximumRetryAttempts: 1
+          enabled: true
