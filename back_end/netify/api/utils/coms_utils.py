@@ -38,7 +38,7 @@ def send_email(email, subject, message):
                 },
                 'Subject': {
                     'Charset': CHARSET,
-                    'Data': subject,
+                    'Data': '*Netify* {0}'.format(subject),
                 },
             },
             Source=SENDER
@@ -52,4 +52,4 @@ def send_email(email, subject, message):
 
 
 def clean_phone_number(phone_number):
-    return "+{0}".format(phone_number.replace('-', ''))
+    return "+1{0}".format(phone_number.replace('-', ''))

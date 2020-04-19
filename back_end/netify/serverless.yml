@@ -41,6 +41,7 @@ provider:
         - apidynamodb:GetShardIteratorapi
         - apidynamodb:ListStreamsapi
         - sns:Publish
+        - ses:SendEmail
       Resource: "*"
 
 #  stage: dev
