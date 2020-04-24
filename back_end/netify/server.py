@@ -66,6 +66,14 @@ def create_user():
     return res['body'], res['statusCode']
 
 
+@netify.route('/netify/users', methods=['PUT'])
+def update_user():
+    event = build_event(request)
+    logging.debug(event)
+    res = user.update_user(event, None)
+    return res['body'], res['statusCode']
+
+
 @netify.route('/netify/users', methods=['GET'])
 def get_users():
     event = build_event(request)

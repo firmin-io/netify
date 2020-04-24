@@ -1,6 +1,4 @@
-import uuid
-
-from utils.time_utils import generate_time_uuid
+from api.utils.time_utils import generate_time_uuid
 
 
 def generate_id():

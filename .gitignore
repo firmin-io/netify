@@ -4,3 +4,8 @@ back_end/netify/Pipfile
 back_end/netify/.serverless
 back_end/netify/node_modules
 back_end/netify/.requirements
+front_end/node_modules
+front_end/package-lock.json
+front_end/build
+front_end/logs
+front_end/.idea

@@ -48,14 +48,15 @@ class LoginRequestModel(Model):
 
 class UserModel(Model):
 
-    def __init__(self, email, first_name, last_name, phone_number, timestamp=None, _id=None):
+    def __init__(self, email, first_name, last_name, phone_number, create_time=None, _id=None, update_time=None):
         Model.__init__(self)
         self.id = _id
         self.email = email
         self.first_name = first_name
         self.last_name = last_name
         self.phone_number = phone_number
-        self.timestamp = timestamp
+        self.create_time = create_time
+        self.update_time = update_time
 
     def to_dict(self):
         return {
@@ -64,7 +65,8 @@ class UserModel(Model):
             'first_name': self.first_name,
             'last_name': self.last_name,
             'phone_number': self.phone_number,
-            'timestamp': self.timestamp
+            'create_time': self.create_time,
+            'update_time': self.update_time
         }
 
     def to_dynamo_dict(self):
@@ -86,6 +88,22 @@ class UserModel(Model):
             raise_bad_request_error(e)
 
     @classmethod
+    def from_update_request(cls, json):
+        print('building model')
+        print(json)
+        try:
+            return UserModel(
+                email=json['email'],
+                first_name=json['first_name'],
+                last_name=json['last_name'],
+                phone_number=json['phone_number'],
+                _id=json['id']
+            )
+        except KeyError as e:
+            print('key error {}'.format(str(e)))
+            raise_bad_request_error(e)
+
+    @classmethod
     def from_dynamo(cls, json):
         logging.debug("user model dynamo db")
         logging.debug(json)
@@ -96,7 +114,8 @@ class UserModel(Model):
                 first_name=json['first_name'],
                 last_name=json['last_name'],
                 phone_number=json['phone_number'],
-                timestamp=json['timestamp']
+                create_time=json['create_time'],
+                update_time=json['update_time']
             )
         except KeyError as e:
             raise_dynamo_error(e)

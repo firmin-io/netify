@@ -79,6 +79,8 @@ def import_handler(data):
 
 
 def build_function(name, data):
+    if (name == 'batch'):
+        return
     m = import_handler(data['handler'])
     code_lines.append('\n\n')
     http_event = data['events'][0]['http']

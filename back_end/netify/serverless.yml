@@ -80,6 +80,16 @@ functions:
       - http:
           path: netify/login
           method: post
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Access-Control-Allow-Origin
 
   create_user:
     handler: api/handlers/user.create_user
@@ -87,6 +97,33 @@ functions:
       - http:
           path: netify/users
           method: post
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Access-Control-Allow-Origin
+
+  update_user:
+    handler: api/handlers/user.update_user
+    events:
+      - http:
+          path: netify/users
+          method: put
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Access-Control-Allow-Origin
 
   get_users:
     handler: api/handlers/user.get_users
@@ -94,6 +131,16 @@ functions:
       - http:
           path: netify/users
           method: get
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Access-Control-Allow-Origin
 
   delete_user:
     handler: api/handlers/user.delete_user
@@ -101,6 +148,16 @@ functions:
       - http:
           path: netify/users/{user_id}
           method: delete
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Access-Control-Allow-Origin
           request:
             paths:
               user_id: true
@@ -111,6 +168,16 @@ functions:
       - http:
           path: netify/messages
           method: post
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Access-Control-Allow-Origin
 
   get_messages:
     handler: api/handlers/message.get_messages
@@ -118,6 +185,16 @@ functions:
       - http:
           path: netify/messages
           method: get
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - Access-Control-Allow-Origin
 
   batch:
     handler: api/handlers/batch.send_messages

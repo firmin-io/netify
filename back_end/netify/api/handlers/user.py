@@ -11,8 +11,11 @@ def login(event, context):
     try:
         login_request = LoginRequestModel.from_request(json.loads(event['body']))
 
-        if login_request.email == 'admin@netify.app' and login_request.password == '#gradMay2020':
-            return build_response_without_body(200)
+        if login_request.email == 'admin@n3tify.net' and login_request.password == 'password':
+            return build_response_without_body(204)
+
+        if login_request.email == 'test@n3tify.net' and login_request.password == 'n3tify_test_account':
+            return build_response_without_body(204)
 
         return errors.build_response_from_api_error(errors.ApiError(errors.invalid_user_name_or_password))
 
@@ -36,6 +39,22 @@ def create_user(event, context):
         logging.debug(user)
         logging.debug(user.to_dict())
         return build_response_with_body(201, user.to_dict())
+
+    except errors.ApiError as ae:
+        return errors.build_response_from_api_error(ae)
+
+    except Exception as e:
+        return errors.build_response_from_api_error(errors.ApiError(errors.internal_server_error, e))
+
+
+def update_user(event, context):
+    try:
+        user_request = UserModel.from_update_request(json.loads(event['body']))
+        logging.debug(user_request.to_dict())
+        user = user_dao.update(user_request)
+        logging.debug(user)
+        logging.debug(user.to_dict())
+        return build_response_with_body(200, user.to_dict())
 
     except errors.ApiError as ae:
         return errors.build_response_from_api_error(ae)

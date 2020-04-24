@@ -9,7 +9,7 @@ ses = boto3.client('ses')
 
 # Replace sender@example.com with your "From" address.
 # This address must be verified with Amazon SES.
-SENDER = 'fsaint1@students.towson.edu'
+SENDER = 'noreply@n3tify.net'
 
 # The character encoding for the email.
 CHARSET = "UTF-8"

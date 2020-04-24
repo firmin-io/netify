@@ -99,7 +99,8 @@ def create(user):
         _id = generate_id()
         logging.debug('id generated')
         user.id = _id
-        user.timestamp = generate_timestamp()
+        user.create_time = generate_timestamp()
+        user.update_time = user.create_time
         table.put_item(
             Item=user.to_dynamo_dict()
         )
@@ -113,3 +114,36 @@ def create(user):
         logging.debug(e)
         logging.debug(str(e))
         raise errors.ApiError(errors.internal_server_error)
+
+
+def update(user):
+    try:
+        table.update_item(
+            Key={
+                'id': user.id
+            },
+            UpdateExpression='set #fn=:fn, #ln=:ln, #e=:e, #p=:p, #u=:u',
+            ExpressionAttributeValues={
+                ':fn': user.first_name,
+                ':ln': user.last_name,
+                ':e': user.email,
+                ':p': user.phone_number,
+                ':u': generate_timestamp()
+            },
+            ExpressionAttributeNames={
+                '#fn': 'first_name',
+                '#ln': 'last_name',
+                '#e': 'email',
+                '#p': 'phone_number',
+                '#u': 'update_time'
+            }
+        )
+        return get_by_id(user.id)
+    except ClientError as e:
+        raise errors.ApiError(errors.internal_server_error, e)
+
+    except errors.ApiError as e:
+        raise e
+
+    except Exception as e:
+        raise errors.ApiError(errors.internal_server_error, e)

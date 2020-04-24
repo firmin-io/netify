@@ -1,0 +1,185 @@
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+
+$qm-body: #f4f4f4;
+$qm-fields: #e5e5e5;
+$qm-info: #2ec4b6;
+$qm-primary: #5633c6;
+$qm-primary-medium: #775bd1;
+$qm-primary-light: #aa99e2;
+$qm-primary-very-light: #ddd6f3;
+
+$qm-secondary-light: #81dbd3;
+$qm-background-light: #f7f7f7;
+
+$qm-primary-dark: #2b1963;
+
+$theme-colors: (
+  secondary: #ccc1ed,
+  primary: $qm-primary,
+  info: $qm-info,
+  danger: $qm-body,
+  light: #aa99e2,
+  dark: #2b1963
+);
+
+.qm-text-secondary-medium {
+  color: $qm-info !important;
+}
+
+.icon-secondary :hover {
+  color: $qm-primary-medium !important;
+}
+
+.icon-primary :hover {
+  color: $qm-info !important;
+}
+
+.vert-button {
+  display: block !important;
+}
+
+.right-border-dotted {
+  border-right: thin solid #c3c3c3;
+}
+
+.qm-text-secondary-light {
+  color: $qm-secondary-light !important;
+}
+
+.qm-text-primary {
+  color: $qm-primary-medium !important;
+}
+
+.quiz-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.quiz {
+  flex: 1 0 21%;
+  margin: 0.25em;
+  max-width: 30%;
+}
+
+.border-less {
+  border: none !important;
+}
+
+.background-less {
+  background: none !important;
+}
+
+.flashcard-deck-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flashcard-deck {
+  flex: 1 0 21%;
+  margin: 0.25em;
+  max-width: 30%;
+}
+
+.qm-text-primary {
+  color: $qm-primary;
+}
+
+.qm-text-primary-medium {
+  color: $qm-primary-medium;
+}
+
+input {
+  background-color: $qm-fields !important;
+  outline: none !important  ;
+}
+
+textarea {
+  background-color: $qm-fields !important;
+  outline: none !important  ;
+}
+
+.qm-container {
+  margin: 2em;
+  padding: 2em;
+  border-radius: 10px;
+  background-color: $qm-background-light;
+  box-shadow: -2px 2px 2px 0 $qm-fields;
+  height: 100%;
+}
+
+.ReactModal__Content {
+  background-color: $qm-body !important;
+}
+
+.qm-active {
+  color: $qm-primary !important;
+}
+
+.qm-card {
+  background-color: $qm-body !important;
+}
+
+.App {
+  text-align: center;
+}
+
+body {
+  color: $qm-primary-medium;
+  background-color: $qm-body !important;
+  height: 100%;
+  font-family: futura;
+}
+
+html {
+  height: 100%;
+}
+
+.bg-light {
+  color: #64b314;
+}
+
+.orange {
+  background-color: #f0a202;
+}
+
+.futura {
+  font-family: futura;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@import "bootstrap";

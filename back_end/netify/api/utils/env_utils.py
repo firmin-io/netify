@@ -1,8 +1,5 @@
-import logging
-
+# env var
 env = 'PROD'
-
-logging.getLogger().setLevel(logging.DEBUG)
 
 
 def get_env():
