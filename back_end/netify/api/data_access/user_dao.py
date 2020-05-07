@@ -77,6 +77,9 @@ def get_all():
     try:
         response = table.scan()
         items = validation.validate_items_exist_quietly(response)
+        if items is None:
+            logging.debug("users, items is none")
+            return []
         users = []
         for item in items:
             user = UserModel.from_dynamo(item)

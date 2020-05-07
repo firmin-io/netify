@@ -1,6 +1,7 @@
 require("dotenv").config();
 // replace this value to connect to prod api
-const basePath = "http://localhost:5000/netify";
+const basePath =
+  "https://l8xtnkax5h.execute-api.us-east-1.amazonaws.com/dev/netify";
 
 const post = async (path, body, headers) => {
   console.log("req body");

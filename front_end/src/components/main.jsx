@@ -58,7 +58,9 @@ class Main extends Component {
         this.setState({ messages: json });
       },
       this.context.modals.openErrorModal,
-      this.context.user.logout
+      () => {
+        this.context.modals.openErrorModal("Try again later");
+      }
     );
   };
 
@@ -144,7 +146,10 @@ class Main extends Component {
       (json) => {
         this.setState({ users: json });
       },
-      this.context.openErrorModal
+      this.context.modals.openErrorModal,
+      () => {
+        this.context.modals.openErrorModal("Try again later");
+      }
     );
   };
 
@@ -234,41 +239,41 @@ class Main extends Component {
           </button>
         </div>
         <div className="flex justify-center">
-          <table class="table-auto">
+          <table className="table-auto">
             <thead>
               <tr>
-                <th class="px-4 py-2">First Name</th>
-                <th class="px-4 py-2">Last Name</th>
-                <th class="px-4 py-2">Email</th>
-                <th class="px-4 py-2">Phone</th>
-                <th class="px-4 py-2">Time Created</th>
-                <th class="px-4 py-2">Time Updated</th>
-                <th class="px-4 py-2"></th>
+                <th className="px-4 py-2">First Name</th>
+                <th className="px-4 py-2">Last Name</th>
+                <th className="px-4 py-2">Email</th>
+                <th className="px-4 py-2">Phone</th>
+                <th className="px-4 py-2">Time Created</th>
+                <th className="px-4 py-2">Time Updated</th>
+                <th className="px-4 py-2"></th>
               </tr>
             </thead>
             <tbody>
               {this.state.users.map((user) => {
                 return (
                   <tr>
-                    <td class="border-t-2 border-dotted px-4 py-2">
+                    <td className="border-t-2 border-dotted px-4 py-2">
                       {user.first_name}
                     </td>
-                    <td class="border-t-2 border-dotted px-4 py-2">
+                    <td className="border-t-2 border-dotted px-4 py-2">
                       {user.last_name}
                     </td>
-                    <td class="border-t-2 border-dotted px-4 py-2">
+                    <td className="border-t-2 border-dotted px-4 py-2">
                       {user.email}
                     </td>
-                    <td class="border-t-2 border-dotted px-4 py-2">
+                    <td className="border-t-2 border-dotted px-4 py-2">
                       {user.phone_number}
                     </td>
-                    <td class="border-t-2 border-dotted px-4 py-2">
+                    <td className="border-t-2 border-dotted px-4 py-2">
                       {user.create_time}
                     </td>
-                    <td class="border-t-2 border-dotted px-4 py-2">
+                    <td className="border-t-2 border-dotted px-4 py-2">
                       {user.update_time}
                     </td>
-                    <td class="border-t-2 border-dotted px-4 py-2">
+                    <td className="border-t-2 border-dotted px-4 py-2">
                       <div className="flex justify-between">
                         <button
                           title="edit"
@@ -316,25 +321,25 @@ class Main extends Component {
           </button>
         </div>
         <div className="flex justify-center">
-          <table class="table-fixed">
+          <table className="table-fixed">
             <thead>
               <tr>
-                <th class="px-4 py-2">Subject</th>
-                <th class="px-4 py-2">Message</th>
-                <th class="px-4 py-2">Timestamp</th>
+                <th className="px-4 py-2">Subject</th>
+                <th className="px-4 py-2">Message</th>
+                <th className="px-4 py-2">Timestamp</th>
               </tr>
             </thead>
             <tbody>
               {this.state.messages.map((message) => {
                 return (
                   <tr>
-                    <td class="border-t-2 border-dotted px-4 py-2 w-1/5">
+                    <td className="border-t-2 border-dotted px-4 py-2 w-1/5">
                       {message.subject}
                     </td>
-                    <td class="border-t-2 border-dotted px-4 py-2 w-3/5">
+                    <td className="border-t-2 border-dotted px-4 py-2 w-3/5">
                       {message.message}
                     </td>
-                    <td class="border-t-2 border-dotted px-4 py-2 w-1/5">
+                    <td className="border-t-2 border-dotted px-4 py-2 w-1/5">
                       {message.timestamp}
                     </td>
                   </tr>

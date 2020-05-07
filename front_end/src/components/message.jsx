@@ -8,10 +8,18 @@ class Message extends Component {
 
   constructor(props, context) {
     super(props, context);
-    this.state = {};
+    this.state = {
+      subject: "",
+      message: "",
+    };
   }
 
   createMessage = async () => {
+    if (this.state.subject.length < 1 || this.state.message.length < 1) {
+      alert("Provide a valid subject and message");
+      return;
+    }
+
     const req = {
       body: {
         subject: this.state.subject,

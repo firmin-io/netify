@@ -15,6 +15,9 @@ def get_all():
     try:
         response = table.scan()
         items = validation.validate_items_exist_quietly(response)
+        if items is None:
+            logging.debug("messages, items is none")
+            return []
         messages = []
         for item in items:
             message = MessageModel.from_dynamo(item)

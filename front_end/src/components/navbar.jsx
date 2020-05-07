@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Modal from "react-modal";
 import { NavLink } from "react-router-dom";
 import GlobalContext from "./contexts/globalContext";
+import { emailRegex } from "../common/validation";
 
 const modalStyles = {
   content: {
@@ -48,10 +49,14 @@ class NavBar extends Component {
 
   login = async () => {
     let _state = this.state;
-    _state.loginModalIsOpen = false;
-    this.setState(_state);
 
-    await this.context.user.login(this.state.email, this.state.password);
+    if (emailRegex.test(this.state.email) && this.state.password.length > 2) {
+      await this.context.user.login(this.state.email, this.state.password);
+      _state.loginModalIsOpen = false;
+      this.setState(_state);
+    } else {
+      alert("Your input is invalid");
+    }
   };
 
   handleChange = (name, e) => {

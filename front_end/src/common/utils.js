@@ -7,14 +7,14 @@ export const apiWrapper = async (
 ) => {
   try {
     //lg:mx-40 xl:mx-72 lg:px-4 xl:px-4 md:px-4
-    console.log(req);
+    //console.log(req);
     const res = await serviceCall(req);
-    console.log(res);
+    //console.log(res);
 
     if (res.status === 204) {
       return onSuccess({});
     }
-    //console.log(res);
+    ////console.log(res);
     const json = await res.json();
 
     if (res.ok) {
@@ -25,19 +25,19 @@ export const apiWrapper = async (
       //onError("Your session has expired. Please login.");
       return onUnauthorized();
     }
-    console.log("json *******");
-    console.log(json);
+    //console.log("json *******");
+    //console.log(json);
     return onError(json.description ? json.description : String(json));
   } catch (e) {
     if (e instanceof TypeError && e.message === "Failed to fetch") {
-      return onError("N3tify is down. Try again is a bit");
+      onError("N3tify is down. Try again is a bit");
     }
-    throw e;
+    return;
   }
 };
 
 export const saveUserData = (data) => {
-  console.log(data);
+  //console.log(data);
   localStorage.setItem("n3tify", JSON.stringify(data));
 };
 
@@ -48,10 +48,10 @@ export const clearUserData = () => {
 export const readUserData = () => {
   let data = localStorage.getItem("n3tify");
   if (typeof data !== "undefined" && data !== null && data !== "") {
-    console.log(data);
+    //console.log(data);
     data = JSON.parse(data);
     if (data.email === undefined || data.email === null) {
-      console.log("there is nothing saved in local storage");
+      //console.log("there is nothing saved in local storage");
     } else {
       return data;
     }

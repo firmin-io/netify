@@ -51,7 +51,7 @@ class Modals extends Component {
     _state.showWarningModal = false;
     this.setState(_state);
     if (this.state.warningCallback) {
-      console.log("calling callback");
+      //console.log("calling callback");
       this.state.warningCallback();
     }
   };
@@ -65,7 +65,7 @@ class Modals extends Component {
 
   openErrorModal = (content) => {
     this.closeAllModals();
-    console.log(content);
+    //console.log(content);
     let _state = this.state;
     _state.errorModalContent = <h4>{content}</h4>;
     _state.showErrorModal = true;
@@ -108,7 +108,7 @@ class Modals extends Component {
     _state.warningModalContent = <h4>{content}</h4>;
     _state.showWarningModal = true;
     _state.warningCallback = callback;
-    console.log(_state);
+    //console.log(_state);
     this.setState(_state);
   };
 

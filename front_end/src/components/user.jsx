@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import GlobalContext from "./contexts/globalContext";
 import N3tifyService from "../services/n3tify";
 import { apiWrapper } from "../common/utils";
+import { emailRegex, phoneRegex, nameRegex } from "../common/validation";
 
 class User extends Component {
   static contextType = GlobalContext;
@@ -38,6 +39,41 @@ class User extends Component {
   };
 
   createUser = async () => {
+    const allEmpty = [
+      this.state.phone_number,
+      this.state.email,
+      this.state.first_name,
+      this.state.last_name,
+    ].every((it) => it.length < 1);
+
+    if (allEmpty) {
+      alert("The form must be filled.");
+      return;
+    }
+
+    if (!emailRegex.test(this.state.email)) {
+      alert("Provide a valid email");
+      return;
+    }
+
+    if (
+      !phoneRegex.test(this.state.phone_number) ||
+      this.state.phone_number === "000-000-0000"
+    ) {
+      alert("Provide a valid phone number like 123-456-7890");
+      return;
+    }
+
+    if (
+      this.state.first_name.length < 1 ||
+      this.state.last_name.length < 1 ||
+      !nameRegex.test(this.state.first_name) ||
+      !nameRegex.test(this.state.last_name)
+    ) {
+      alert("Provide a valid name");
+      return;
+    }
+
     const req = {
       body: {
         first_name: this.state.first_name,

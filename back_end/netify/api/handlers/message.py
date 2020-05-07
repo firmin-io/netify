@@ -28,6 +28,8 @@ def create_message(event, context):
 def get_messages(event, context):
     try:
         items = message_dao.get_all()
+        if items is None:
+            items = []
         messages = [item.to_dict() for item in items if items]
         return build_response_with_body(200, messages)
 

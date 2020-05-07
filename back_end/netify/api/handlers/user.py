@@ -81,6 +81,8 @@ def delete_user(event, context):
 def get_users(event, context):
     try:
         items = user_dao.get_all()
+        if items is None:
+            items = []
         users = [item.to_dict() for item in items if items]
         return build_response_with_body(200, users)
 
